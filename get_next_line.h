@@ -6,12 +6,12 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 11:44:03 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/07 16:58:41 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/07 19:57:02 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 1
+#define BUFFER_SIZE 5
 #endif
 
 #ifndef GET_NEXT_LINE_H

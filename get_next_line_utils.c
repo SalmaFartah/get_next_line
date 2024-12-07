@@ -6,24 +6,13 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 12:16:56 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/07 16:35:04 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/07 20:22:22 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 
-void ffree(char *s, int st, int l)
-{
-	int i;
-	i = 0;
-
-	while (i < l)
-	{
-		free (s + st + i);
-		i++;
-	}
-}
 int ft_strcmp(char *s1, char *s2)
 {
 	int i;
@@ -76,44 +65,32 @@ char *afnl(char *bf)
 {
 	int	i;
 	size_t lb;
-	char *temp;
 
 	i = 0;
 	lb = ft_strlen(bf);
 	while (bf[i])
 	{
 		if (bf[i] == '\n')
-		{
-			temp = ft_substr(bf, i + 1, lb);
-			free (bf);
-			return (temp);
-		}
+			return (ft_substr(bf, i + 1, lb));
 			
 		i++;
 	}
-	
 	return (NULL);
 }
 char *bfnl(char *bf)
 {
     int i;
-	char *bh;
 
     i = 0;
-	bh = NULL;
-	// printf("bfnl====[%s]\n", bf);
     while (bf[i])
 	{
 		if (bf[i] == '\n')
 		{
-			bh = ft_substr(bf, 0, i + 1);
+			bf = ft_substr(bf, 0, i + 1);
 		}
 		i++;
 	}
-	// printf("bfnl****[%s]\n", bf);
-	// printf("bh++++[%s]\n", bh);
-	// free(bf);
-    return (bh);
+    return (bf);
 }
 
 int ft_strchr(char *s, int c)
@@ -160,11 +137,9 @@ char *ft_strjoin(char const *s1, char const *s2)
             p[i] = s1[i];
             i++;
         }
-	// printf("JOIN----");
     k = 0;
     while (k <= ls2)
         p[i++] = s2[k++];
-	p[i] = '\0';
-	free((void *)s1);
+	// free((void *)s1);
     return (p);
 }

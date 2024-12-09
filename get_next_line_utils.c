@@ -6,22 +6,13 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 12:16:56 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/07 20:22:22 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/09 13:57:34 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 
-int ft_strcmp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);	
-}
 char	*ft_strdup(const char *s1)
 {
 	int		u;
@@ -61,37 +52,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr[i] = '\0';
 	return (ptr);
 }
-char *afnl(char *bf)
-{
-	int	i;
-	size_t lb;
 
-	i = 0;
-	lb = ft_strlen(bf);
-	while (bf[i])
-	{
-		if (bf[i] == '\n')
-			return (ft_substr(bf, i + 1, lb));
-			
-		i++;
-	}
-	return (NULL);
-}
-char *bfnl(char *bf)
-{
-    int i;
-
-    i = 0;
-    while (bf[i])
-	{
-		if (bf[i] == '\n')
-		{
-			bf = ft_substr(bf, 0, i + 1);
-		}
-		i++;
-	}
-    return (bf);
-}
 
 int ft_strchr(char *s, int c)
 {

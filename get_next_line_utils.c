@@ -6,14 +6,14 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 12:16:56 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/09 13:57:34 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:15:53 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	int		u;
 	char	*ptr;
@@ -30,7 +30,7 @@ char	*ft_strdup(const char *s1)
 	ptr[u] = '\0';
 	return (ptr);
 }
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char		*ptr;
 	size_t		i;
@@ -59,7 +59,7 @@ int ft_strchr(char *s, int c)
 	size_t	u;
 
 	u = 0;
-	if (!s)
+	if (!s || !c)
 		return 0;
 	while (u <= ft_strlen(s))
 	{
@@ -69,16 +69,18 @@ int ft_strchr(char *s, int c)
 	}
 	return (0);
 }
-size_t	ft_strlen(char const *s)
+size_t	ft_strlen(char *s)
 {
     size_t	counter;
 
     counter = 0;
+	if (!s)
+		return (0);
     while (s[counter])
 		counter++;
     return (counter);
 }
-char *ft_strjoin(char const *s1, char const *s2)
+char *ft_strjoin(char *s1, char *s2)
 {
     size_t ls1;
     size_t ls2;
@@ -101,6 +103,6 @@ char *ft_strjoin(char const *s1, char const *s2)
     k = 0;
     while (k <= ls2)
         p[i++] = s2[k++];
-	// free((void *)s1);
+	ft_free(&s1);
     return (p);
 }

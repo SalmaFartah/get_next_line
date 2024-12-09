@@ -6,54 +6,71 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:06:38 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/09 13:57:14 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/09 20:45:27 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-#include <string.h>
 
+void ft_free(char **p)
+{
+	if(p)
+	{
+		free(*p);
+		*p = NULL;
+	}
+}
 int ft_strcmp(char *s1, char *s2)
 {
 	int i;
 
 	i = 0;
+	if (!s1 || !s2)
+		return (0);
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);	
 }
 
-char *afnl(char *bf)
+char *afnl(char **bf)
 {
 	int	i;
 	size_t lb;
+	char *nw;
 
 	i = 0;
-	lb = ft_strlen(bf);
-	while (bf[i])
+	lb = ft_strlen(*bf);
+	while ((*bf)[i])
 	{
-		if (bf[i] == '\n')
-			return (ft_substr(bf, i + 1, lb));
-			
-		i++;
-	}
-	return (NULL);
-}
-char *bfnl(char *bf)
-{
-    int i;
-
-    i = 0;
-    while (bf[i])
-	{
-		if (bf[i] == '\n')
+		if ((*bf)[i] == '\n')
 		{
-			bf = ft_substr(bf, 0, i + 1);
+			nw = ft_substr(*bf, i + 1, lb);
+			ft_free(bf);
+			return (nw);
 		}
 		i++;
 	}
-    return (bf);
+	ft_free (bf);
+	return (NULL);
+}
+char *bfnl(char **bf)
+{
+    int i;
+	char *line;
+
+    i = 0;
+    while ((*bf)[i])
+	{
+		if ((*bf)[i] == '\n')
+		{
+			line = ft_substr(*bf, 0, i + 1);
+			return (line);
+		}
+		i++;
+	}
+	line = ft_strdup(*bf);
+    return (line);
 }
 
 char	*get_next_line(int fd)
@@ -65,21 +82,22 @@ char	*get_next_line(int fd)
 
 	rdbuff = malloc(BUFFER_SIZE + 1);
 	if (!rdbuff)
-		return (NULL);
-	(!bf) && (bf = "");
+		return (ft_free(&bf), NULL);
+	(!bf) && (bf = ft_strdup(""));
 	k = 1;
 	while (!ft_strchr(bf, '\n') && k > 0)
 	{
 		k = read(fd, rdbuff,BUFFER_SIZE);
 		if (k < 0)
-			return (free(rdbuff), NULL);
+			return (ft_free(&rdbuff), ft_free(&bf), NULL);
 		rdbuff[k] = '\0';
 		bf = ft_strjoin(bf, rdbuff);
 	}
-	if (ft_strcmp(bf, "") == 0)
-		return (NULL);
-	lgn = bfnl(bf);
-	bf = afnl(bf);
+	ft_free(&rdbuff);
+	if (!bf || ft_strcmp(bf, "") == 0)
+		return (ft_free(&bf), NULL);
+	lgn = bfnl(&bf);
+	bf = afnl(&bf);
 	return (lgn);
 }
 
@@ -94,5 +112,5 @@ char	*get_next_line(int fd)
 // 	printf("%s", t);
 // 	printf("%s", r);
 
-// 	// system("leaks a.out");
+// 	system("leaks a.out");
 // }

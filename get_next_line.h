@@ -6,7 +6,7 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 11:44:03 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/09 13:57:54 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/09 20:36:53 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 #include <stdlib.h>
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(char const *s);
+char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(char *s);
 int 	ft_strchr(char *s, int c);
-char	*bfnl(char *bf);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*afnl(char *bf);
+char	*bfnl(char **bf);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*afnl(char **bf);
 int     ft_strcmp(char *s1, char *s2);
-char	*ft_strdup(const char *s1);
+char	*ft_strdup(char *s1);
+void    ft_free(char **p);
 #endif

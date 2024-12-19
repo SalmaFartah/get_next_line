@@ -6,12 +6,12 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:15:50 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/13 16:15:51 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/19 15:24:25 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#  define GET_NEXT_LINE_H
 
 # include <unistd.h>
 # include <stdlib.h>

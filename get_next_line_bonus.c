@@ -6,7 +6,7 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:15:55 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/13 16:57:28 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/19 15:23:32 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void	ft_free(char **p)
 char	*afnl(char **bf)
 {
 	int		i;
-	size_t	lb;
 	char	*nw;
 
 	i = 0;
-	lb = ft_strlen(*bf);
 	while ((*bf)[i])
 	{
 		if ((*bf)[i] == '\n')
 		{
-			nw = ft_substr(*bf, i + 1, lb);
+			nw = ft_substr(*bf, i + 1, ft_strlen(*bf) - i - 1);
+			if (!nw)
+				return (ft_free(bf), NULL);
 			ft_free(bf);
 			return (nw);
 		}
@@ -54,11 +54,15 @@ char	*bfnl(char **bf)
 		if ((*bf)[i] == '\n')
 		{
 			line = ft_substr(*bf, 0, i + 1);
+			if (!line)
+				return (NULL);
 			return (line);
 		}
 		i++;
 	}
 	line = ft_strdup(*bf);
+	if (!line)
+		return (NULL);
 	return (line);
 }
 
@@ -82,10 +86,10 @@ char	*get_next_line(int fd)
 		rdbuff[k] = '\0';
 		bf[fd] = ft_strjoin(bf[fd], rdbuff);
 	}
-	ft_free(&rdbuff);
 	if (!bf[fd] || !*bf[fd])
-		return (ft_free(&bf[fd]), NULL);
+		return (ft_free(&rdbuff), ft_free(&bf[fd]), NULL);
 	lgn = bfnl(&bf[fd]);
-	bf[fd] = afnl(&bf[fd]);
-	return (lgn);
+	if (!lgn)
+		return (ft_free(&rdbuff), ft_free(&bf[fd]), NULL);
+	return (bf[fd] = afnl(&bf[fd]), ft_free(&rdbuff), lgn);
 }

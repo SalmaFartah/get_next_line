@@ -6,7 +6,7 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 12:16:56 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/11 17:14:04 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/19 15:20:03 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,18 @@ char	*ft_strdup(char *s1)
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*ptr;
+	char *stdph;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	(len > ft_strlen(s) - start) && (len = ft_strlen(s) - start);
 	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
+	{
+		stdph = ft_strdup("");
+		if(!stdph)
+			return (NULL);
+		return (stdph);
+	}
 	ptr = malloc(len + 1);
 	if (!ptr)
 		return (NULL);
@@ -95,7 +100,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (ft_strdup(s1));
 	p = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!p)
-		return (NULL);
+		return (ft_free(&s1), NULL);
 	i = 0;
 	if (ft_strlen(s1))
 	{

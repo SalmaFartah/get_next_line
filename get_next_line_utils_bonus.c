@@ -6,7 +6,7 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:15:42 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/19 15:20:13 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/19 15:36:14 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	if (start >= ft_strlen(s))
 	{
 		stdph = ft_strdup("");
-		if(!stdph)
+		if (!stdph)
 			return (NULL);
 		return (stdph);
 	}
-		
 	ptr = malloc(len + 1);
 	if (!ptr)
 		return (NULL);

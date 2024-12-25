@@ -6,11 +6,11 @@
 /*   By: sfartah <sfartah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 16:15:42 by sfartah           #+#    #+#             */
-/*   Updated: 2024/12/19 15:36:14 by sfartah          ###   ########.fr       */
+/*   Updated: 2024/12/25 13:36:00 by sfartah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strdup(char *s1)
 {
@@ -21,7 +21,7 @@ char	*ft_strdup(char *s1)
 		return (NULL);
 	ptr = malloc(ft_strlen(s1) + 1);
 	if (!ptr)
-		return (ft_free(&ptr), NULL);
+		return (free(ptr), NULL);
 	u = 0;
 	while (s1[u])
 	{
@@ -100,7 +100,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (ft_strdup(s1));
 	p = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!p)
-		return (ft_free(&s1), NULL);
+		return (free(s1), NULL);
 	i = 0;
 	if (ft_strlen(s1))
 	{
@@ -113,6 +113,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	k = 0;
 	while (k <= ft_strlen(s2))
 		p[i++] = s2[k++];
-	ft_free(&s1);
+	free(s1);
 	return (p);
 }
